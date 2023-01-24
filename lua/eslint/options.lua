@@ -20,6 +20,7 @@ local run_ons = { "save", "type" }
 local default_options = {
   _initialized = false,
   bin = "eslint",
+  use_project_bin = true,
   code_actions = {
     enable = true,
     apply_on_save = {
@@ -46,6 +47,11 @@ local function get_validate_argmap(tbl, key)
         return val == nil or vim.tbl_contains(bins, val)
       end,
       table.concat(bins, ", "),
+    },
+    ["use_project_bin"] = {
+        tbl["use_project_bin"],
+        "boolean",
+        true
     },
     ["code_actions.enable"] = {
       tbl["code_actions.enable"],

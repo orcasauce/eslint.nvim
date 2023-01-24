@@ -278,12 +278,14 @@ end
 ---@param cmd string
 ---@return nil|string
 function M.resolve_bin(cmd)
-  local project_root = get_working_directory()
+  if options.get("use_project_bin") then
+    local project_root = get_working_directory()
 
-  if project_root then
-    local local_bin = path_join(project_root, "/node_modules/.bin", cmd)
-    if vim.fn.executable(local_bin) == 1 then
-      return local_bin
+    if project_root then
+      local local_bin = path_join(project_root, "/node_modules/.bin", cmd)
+      if vim.fn.executable(local_bin) == 1 then
+        return local_bin
+      end
     end
   end
 
